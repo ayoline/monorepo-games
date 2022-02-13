@@ -1,0 +1,106 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Anderson P. Soares" />
+    <meta property="og:description" content="Exercício: Backend-Node-Modules - 19-01-22" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="300" />
+    <meta property="og:image:height" content="300" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main>
+        <section id="btn-box">
+            <button id="btn-add-game">Add Game</button>
+        </section>
+
+        <section id="table-box">
+            <div id="table-in-table-box">
+                <table id=table></table>
+            </div>
+        </section>
+
+        <section id="add-game-forms">
+            <div id="add-forms">
+                <div id="close-add-forms">
+                    <p id="btn-in-close-add-forms"></p>
+                </div>
+                <h3>Add a Game:</h3>
+                <div class="inputs-in-add-game-forms">
+                    <label for="add-game-input">Game</label>
+                    <input id="add-game-input" type="text" />
+                </div>
+                <div class="inputs-in-add-game-forms">
+                    <label for="add-year-input">Year</label>
+                    <input id="add-year-input" type="number" />
+                </div>
+                <div class="inputs-in-add-game-forms">
+                    <label for="add-genre-input">Genre</label>
+                    <input id="add-genre-input" type="text" />
+                </div>
+                <div class="inputs-in-add-game-forms">
+                    <label for="add-multiplayer-input">Multiplayer</label>
+                    <input id="add-multiplayer-input" type="checkbox" />
+                </div>
+                <div class="inputs-in-add-game-forms">
+                    <label for="add-offline-input">Offline</label>
+                    <input id="add-offline-input" type="checkbox" />
+                </div>
+                <div class="inputs-in-add-game-forms">
+                    <label for="add-crossplataform-input">Crossplataform</label>
+                    <input id="add-crossplataform-input" type="checkbox" />
+                </div>
+                <button id="btn-add-confirm">Add</button>
+            </div>
+        </section>
+
+        <section id="update-game-forms">
+            <div id="update-forms">
+                <div id="close-update-forms">
+                    <p id="btn-in-close-update-forms"></p>
+                </div>
+                <h3>Update the Game:</h3>
+                <div class="inputs-in-update-game-forms">
+                    <label for="update-game-input">Game</label>
+                    <input id="update-game-input" type="text" />
+                </div>
+                <div class="inputs-in-update-game-forms">
+                    <label for="update-year-input">Year</label>
+                    <input id="update-year-input" type="number" />
+                </div>
+                <div class="inputs-in-update-game-forms">
+                    <label for="update-genre-input">Genre</label>
+                    <input id="update-genre-input" type="text" />
+                </div>
+                <div class="inputs-in-update-game-forms">
+                    <label for="update-multiplayer-input">Multiplayer</label>
+                    <input id="update-multiplayer-input" type="checkbox" />
+                </div>
+                <div class="inputs-in-update-game-forms">
+                    <label for="update-offline-input">Offline</label>
+                    <input id="update-offline-input" type="checkbox" />
+                </div>
+                <div class="inputs-in-update-game-forms">
+                    <label for="update-crossplataform-input">Crossplataform</label>
+                    <input id="update-crossplataform-input" type="checkbox" />
+                </div>
+                <button id="btn-update-confirm">Update</button>
+            </div>
+        </section>
+
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

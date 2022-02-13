@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 8080;
+const port = 3001;
+app.use(express.static('src'));
 
-app.use('/games', express.static('src/game-repo'));
-
-app.listen(port, () => console.log(`app listening on port ${port}!`));
+app.listen(port, () => console.log(`listening on port: ${port}`));
