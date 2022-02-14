@@ -1,16 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const jsonUsers = require('./users.json');
+const jsonGames = require('./games.json');
 
 router.get('/order', function (req, res) {
-    const isNotEmpty = req.query.value;
-    const orderedGames = jsonUsers;
+    const value = req.query.value;
+    const orderedGames = jsonGames;
 
-    if (isNotEmpty) {
+    if (value === 'order') {
         orderedGames.sort(
             (a, b) => Number(a.id) > Number(b.id) ? 1 : -1
         );
         filteredResponse(orderedGames, res);
+    } else {
+        const filtered = jsonGames.filter((element) => {
+            return element.id === Number(value);
+        });
+        filteredResponse(filtered, res);
     }
 });
 

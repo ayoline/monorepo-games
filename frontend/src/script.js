@@ -1,4 +1,4 @@
-const apiUrl = 'http://192.168.223.170:3000'
+const apiUrl = 'http://192.168.14.170:3000'
 
 loadTableOrderById();
 
@@ -26,23 +26,13 @@ btnCloseAddForms.onclick = function () { closeForms('add') }
 
 const addGameForms = document.querySelector('#add-game-forms');
 
-
+const inputUpdateId = document.querySelector('#update-id-input');
 const inputUpdateGame = document.querySelector('#update-game-input');
 const inputUpdateYear = document.querySelector('#update-year-input');
 const inputUpdateGenre = document.querySelector('#update-genre-input');
 const inputUpdateMultiplayer = document.querySelector('#update-multiplayer-input');
 const inputUpdateOffline = document.querySelector('#update-offline-input');
 const inputUpdateCrossplataform = document.querySelector('#update-crossplataform-input');
-
-const btnUpdateConfirm = document.querySelector('#btn-update-confirm');
-btnUpdateConfirm.onclick = function () {
-    if (inputUpdateGame.value && inputUpdateYear.value && inputUpdateGenre.value) {
-        //saveNewGame();
-        console.log('update');
-    } else {
-        alert('Please fill in all fields!');
-    }
-}
 
 const btnCloseUpdateForms = document.querySelector('#btn-in-close-update-forms');
 btnCloseUpdateForms.innerHTML = "X";
@@ -86,7 +76,7 @@ function saveGameOnServer(_element) {
 }
 
 function loadTableOrderById() {
-    fetch(apiUrl + `/order/order?value=${true}`).then(resp => resp.text()).then(element => {
+    fetch(apiUrl + `/order/order?value=${'order'}`).then(resp => resp.text()).then(element => {
         element = JSON.parse(element);
 
         loadFilteredTable(element);
@@ -94,9 +84,60 @@ function loadTableOrderById() {
 }
 
 function editGameById(_gameToBeUpdated) {
-    const el = _gameToBeUpdated;
-    console.log(el)
-    showForms('update');
+    const id = _gameToBeUpdated;
+
+    fetch(apiUrl + `/order/order?value=${id}`).then(resp => resp.text()).then(element => {
+        element = JSON.parse(element);
+        const el = element[0];
+        showForms('update');
+
+        inputUpdateId.value = el.id;
+        inputUpdateId.disabled = true;
+        inputUpdateGame.value = el.game;
+        inputUpdateYear.value = el.year;
+        inputUpdateGenre.value = el.genre;
+        inputUpdateMultiplayer.checked = el.multiplayer;
+        inputUpdateOffline.checked = el.offline;
+        inputUpdateCrossplataform.checked = el.crossplataform;
+    });
+}
+
+const btnUpdateConfirm = document.querySelector('#btn-update-confirm');
+btnUpdateConfirm.onclick = function () {
+    if (inputUpdateGame.value && inputUpdateYear.value && inputUpdateGenre.value) {
+        const gameToBeUpdated =
+        {
+            'id': inputUpdateId.value,
+            'game': inputUpdateGame.value,
+            'year': inputUpdateYear.value,
+            'genre': inputUpdateGenre.value,
+            'multiplayer': inputUpdateMultiplayer.checked,
+            'offline': inputUpdateOffline.checked,
+            'crossplataform': inputUpdateCrossplataform.checked
+        };
+        updateGameOnServer(gameToBeUpdated);
+    } else {
+        alert('Please fill in all fields!');
+    }
+}
+
+function updateGameOnServer(_gameToBeUpdated) {
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(_gameToBeUpdated)
+    };
+
+    fetch(apiUrl + '/update/updatedata', requestOptions).then(resp => resp.text()).then(el => {
+        el = JSON.parse(el);
+        if (!el.error) {
+            alert(`Game ID ${el} has been Updated!`);
+            closeForms('update');
+            loadTableOrderById();
+        } else {
+            console.log('damn!');
+        }
+    });
 }
 
 function deleteGameById(_gameToBeDeleted) {
@@ -138,7 +179,7 @@ function loadFilteredTable(_element) {
                 <td>${multiplayer}</td>
                 <td>${offline}</td>
                 <td>${crossplataform}</td>
-                <td><input style="color: rgb(146, 146, 21); font-weight: bold;" type="button" value="Edit" onclick="console.log(${el.id})"></td>
+                <td><input style="color: rgb(146, 146, 21); font-weight: bold;" type="button" value="Edit" onclick="editGameById(${el.id})"></td>
                 <td><input style="color: rgb(212, 16, 16); font-weight: bold;" type="button" value="X" onclick="deleteGameById(${el.id})"></td>
             </tr>
             `;

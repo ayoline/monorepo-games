@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 router.use(express.json());
-const jsonUsers = require('./users.json');
+const jsonGames = require('./games.json');
 const lastGameId = require('./lastId.json');
 const fs = require('fs');
 
@@ -10,9 +10,9 @@ router.post('/savedata', function (req, res) {
     console.log(dataFromClient);
 
     dataFromClient.id = (lastGameId[0].lastid + 1);
-    jsonUsers.push(dataFromClient);
+    jsonGames.push(dataFromClient);
 
-    fs.writeFile('users.json', JSON.stringify(jsonUsers), function (err) {
+    fs.writeFile('games.json', JSON.stringify(jsonGames), function (err) {
         if (err) throw err;
         res.json(dataFromClient);
     });
@@ -24,6 +24,4 @@ router.post('/savedata', function (req, res) {
     });
 });
 
-
-
-module.exports = router
+module.exports = router;
