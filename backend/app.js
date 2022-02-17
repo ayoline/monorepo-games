@@ -1,4 +1,5 @@
 const port = 3000;
+const config = require('./config');
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -13,4 +14,4 @@ app.use('/save', savedata);
 app.use('/delete', deletedata);
 app.use('/update', updatedata);
 
-app.listen(port, () => console.log(`listening on port: ${port}`));
+app.listen(config.port, () => console.log(`listening on port: ${config.port}`));

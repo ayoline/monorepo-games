@@ -1,4 +1,4 @@
-const apiUrl = 'http://192.168.14.170:3000'
+const apiUrl = 'http://localhost:3000'
 
 loadTableOrderById();
 
@@ -11,8 +11,9 @@ const inputAddGenre = document.querySelector('#add-genre-input');
 const inputAddMultiplayer = document.querySelector('#add-multiplayer-input');
 const inputAddOffline = document.querySelector('#add-offline-input');
 const inputAddCrossplataform = document.querySelector('#add-crossplataform-input');
+const bgPage = document.querySelector('#table-box');
 
-const btnAddConfirm = document.querySelector('#btn-add-confirm');
+const btnAddConfirm = document.querySelector('#btn-add-confirm')
 btnAddConfirm.onclick = function () {
     if (inputAddGame.value && inputAddYear.value && inputAddGenre.value) {
         saveNewGame();
@@ -70,7 +71,7 @@ function saveGameOnServer(_element) {
             addedGame.push(el)
             loadFilteredTable(addedGame);
         } else {
-            console.log('damn!');
+            console.log(el.error);
         }
     });
 }
@@ -135,7 +136,7 @@ function updateGameOnServer(_gameToBeUpdated) {
             closeForms('update');
             loadTableOrderById();
         } else {
-            console.log('damn!');
+            console.log(el.error);
         }
     });
 }
@@ -155,7 +156,7 @@ function deleteGameById(_gameToBeDeleted) {
             alert(`Game ${el.game} has been deleted!`);
             loadTableOrderById();
         } else {
-            console.log('damn!');
+            console.log(el.error);
         }
     });
 }
@@ -214,6 +215,7 @@ function errorMsg(_str) {
 }
 
 function showForms(_addOrUpdateUser) {
+    bgPage.style.filter = 'blur(8px)';
     if (_addOrUpdateUser === 'add') {
         addGameForms.style.display = "block";
         addGameForms.style.visibility = "visible";
@@ -226,6 +228,7 @@ function showForms(_addOrUpdateUser) {
 }
 
 function closeForms(_addOrUpdateUser) {
+    bgPage.style.filter = '';
     if (_addOrUpdateUser === 'add') {
         addGameForms.style.visibility = "hidden";
         addGameForms.style.opacity = "0";

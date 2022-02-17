@@ -150,7 +150,7 @@ th{
     display: flex;
     padding: 0px;
     flex-direction: row;
-    align-self: baseline;
+    justify-content: left;
     vertical-align: bottom;
 }
 
@@ -158,11 +158,13 @@ th{
     height: fit-content;
     margin-top: 0%;
     margin-bottom: 0%;
+    margin-left: 0%;
 }
 
 .inputs-in-add-game-forms label, .inputs-in-update-game-forms label  {
     height: fit-content;
     margin-top: auto;
     margin-bottom: auto;
+    margin-right: 0%;
 }
 

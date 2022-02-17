@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
 router.use(express.json());
-const jsonGames = require('./games.json');
 const fs = require('fs');
 
 router.put('/updatedata', function (req, res) {
     const gameFromClient = req.body;
-    console.log(gameFromClient);
 
     if (gameFromClient) {
-        const games = JSON.parse(fs.readFileSync('games.json', 'utf8'));
+        const games = JSON.parse(fs.readFileSync('data/games.json', 'utf8'));
         const gameToBeUpdated = games.find((el) => el.id === parseInt(gameFromClient.id));
 
         if (gameToBeUpdated) {
@@ -21,13 +19,14 @@ router.put('/updatedata', function (req, res) {
             games[gameToBeUpdatedIndex].offline = gameFromClient.offline;
             games[gameToBeUpdatedIndex].crossplataform = gameFromClient.crossplataform;
 
-            try {
-                fs.writeFile('games.json', JSON.stringify(games), function (err) {
+            fs.writeFile('data/games.json', JSON.stringify(games), function (err) {
+                if (!err) {
                     res.json(gameToBeUpdated.id);
-                });
-            } catch (error) {
-                res.json(error);
-            }
+                } else {
+                    console.log('Error: ' + err);
+                    res.send(err);
+                }
+            });
         }
     }
 });

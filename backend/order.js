@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const jsonGames = require('./games.json');
+const fs = require('fs');
 
 router.get('/order', function (req, res) {
     const value = req.query.value;
-    const orderedGames = jsonGames;
+    const orderedGames = JSON.parse(fs.readFileSync('data/games.json', 'utf8'));
 
     if (value === 'order') {
         orderedGames.sort(
@@ -12,7 +12,7 @@ router.get('/order', function (req, res) {
         );
         filteredResponse(orderedGames, res);
     } else {
-        const filtered = jsonGames.filter((element) => {
+        const filtered = orderedGames.filter((element) => {
             return element.id === Number(value);
         });
         filteredResponse(filtered, res);
