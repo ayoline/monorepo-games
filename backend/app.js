@@ -3,10 +3,10 @@ const config = require('./config');
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const order = require('./order');
-const savedata = require('./savedata');
-const deletedata = require('./delete');
-const updatedata = require('./update');
+const order = require('./routes/order');
+const savedata = require('./routes/savedata');
+const deletedata = require('./routes/delete');
+const updatedata = require('./routes/update');
 
 app.use(cors());
 app.use('/order', order);

@@ -16,16 +16,16 @@ router.post('/savedata', function (req, res) {
             res.json(dataFromClient);
         } else {
             console.log('Erro: ' + err);
+            res.send(err);
         }
     });
 
     lastGameId[0].lastid = dataFromClient.id;
     fs.writeFile('data/lastId.json', JSON.stringify(lastGameId), function (err) {
         if (!err) {
-            res.json(dataFromClient);
+            console.log(lastGameId);
         } else {
             console.log('Error: ' + err);
-            res.send(err);
         }
     });
 });
